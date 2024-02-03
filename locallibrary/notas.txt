@@ -11,3 +11,7 @@ For more information see django-admin and manage.py: runserver (Django docs).
 
 python3 manage.py runserver
 
+superuser:
+   usernm: superuser
+   mail:   superuser@email.com
+   passwd: PSIsu1234
