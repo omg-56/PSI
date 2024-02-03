@@ -1,0 +1,13 @@
+Cada vez que hagamos cambios en los modelos que afecten a la estructura de los datos guardados
+(añadir, borrar modelos o campos), hay que hacer (desde /nombre_proyecto)
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+
+By default it will serve the site to your local computer (http://127.0.0.1:8000/), 
+but you can also specify other computers on your network to serve to. 
+For more information see django-admin and manage.py: runserver (Django docs).
+
+python3 manage.py runserver
+
