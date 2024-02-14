@@ -13,10 +13,11 @@
         <li><strong>Copies:</strong> {{ num_instances }}</li>
         <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
         <li><strong>Authors:</strong> {{ num_authors }}</li>
+        <li><strong>Genres:</strong> {{ num_genres }}</li>
         <li>There are {{ num_genres_with_word }} genres that contain the word "{{ word }}".</li>
-        <li>There are {{ num_books_with_word }} books that contain the word "{{ word }}" in the title.</li>
+        <li>Books containing the letter 'a' in the title: {{ num_books_with_word }}</li>
     </ul>
 {% endblock %}
 
 
-{% block title %}AEU Library{% endblock %}
+{% block title %}<title>AEU Library</title>{% endblock %}

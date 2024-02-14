@@ -7,8 +7,7 @@
 {% if author_list %}
   <ul>
   {% for author in author_list %}
-    <li><a href="{{ author.get_absolute_url }}">{{ author.first_name }}
-    {{ author.last_name }} 
+    <li><a href="{{ author.get_absolute_url }}">{{ author }}
     </a> 
     {% if author.date_of_death %}
     ({{ author.date_of_birth }} - {{ author.date_of_death }})
