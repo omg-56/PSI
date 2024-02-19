@@ -92,7 +92,9 @@ WSGI_APPLICATION = "locallibrary.wsgi.application"
     default='postgres://alumnodb:alumnodb@localhost:5432/psi',
     conn_max_age=500)"""
 
-
+db_from_env = dj_database_url.config(
+    default='postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',
+    conn_max_age=500)
           
 """DATABASES = {
     "default": {
