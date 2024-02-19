@@ -104,9 +104,13 @@ WSGI_APPLICATION = "locallibrary.wsgi.application"
 #at the o.s. level: export DATABASE_URL =
 # ’postgres://alumnodb:alumnodb@localhost:5432/psi’
 import dj_database_url
+"""DATABASES = {
+    'default': dj_database_url.config(
+    default='postgresql://alumnodb:alumnodb@localhost:5432/locallibrary',        conn_max_age=600    )}"""
+
 DATABASES = {
     'default': dj_database_url.config(
-    default='postgresql://alumnodb:alumnodb@localhost:5432/locallibrary',        conn_max_age=600    )}
+    default='postgresql://ignacio.nunnez:************@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',        conn_max_age=600    )}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
