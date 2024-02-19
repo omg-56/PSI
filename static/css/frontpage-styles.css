@@ -1,0 +1,38 @@
+/* frontpage-styles.css */
+
+/*.rectangle-list {
+    counter-reset: section;
+}
+
+.rectangle-list li::before::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+}*/
+
+.numbered-list {
+    list-style-type: none;
+    counter-reset: section; /* Establece el contador en 0 */
+}
+
+.numbered-list li {
+    padding-left: 20px; /* Ajusta el espacio a la izquierda para dejar espacio para el número */
+    margin-bottom: 6px;
+    position: relative; /* Hace que el posicionamiento del número sea relativo al li */
+}
+
+.numbered-list li::before {
+    counter-increment: section; /* Incrementa el contador para el siguiente elemento */
+    content: counter(section); /* Contador */
+    font-weight: bold;
+    color: lightskyblue;
+    background-color: orange;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+    position: absolute; /* Posiciona el número */
+    left: -20px; /* Ajusta la posición del número */
+    top: 0; /* Ajusta la posición del número */
+}
+
+
+
