@@ -6,3 +6,5 @@ pip install -r requirements.txt
 
 python locallibrary/manage.py collectstatic --no-input
 python locallibrary/manage.py migrate
+
+cd locallibrary
