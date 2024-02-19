@@ -159,3 +159,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+POSTGRESQL_URL = 'postgresql://alumnodb:alumnodb@localhost:5432/locallibrary'
+NEON_URL = 'postgresql://ignacio.nunnez:************@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require'
+
+# To run the tests: export TESTING=1, or to use the app: unset TESTING
+TESTING = 1
+
+# To see the current value just type echo $TESTING
+if TESTING in os.environ:
+    db_from_env = dj_database_url.config(default=POSTGRESQL_URL, conn_max_age=500)
+else:
+    db_from_env = dj_database_url.config(default=NEON_URL, conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
