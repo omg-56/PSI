@@ -92,9 +92,9 @@ import dj_database_url
     default='postgres://alumnodb:alumnodb@localhost:5432/psi',
     conn_max_age=500)"""
 
-db_from_env = dj_database_url.config(
+"""db_from_env = dj_database_url.config(
     default='postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',
-    conn_max_age=500)
+    conn_max_age=500)"""
           
 """DATABASES = {
     "default": {
@@ -109,9 +109,9 @@ db_from_env = dj_database_url.config(
     'default': dj_database_url.config(
     default='postgresql://alumnodb:alumnodb@localhost:5432/locallibrary',        conn_max_age=600    )}"""
 
-DATABASES = {
+"""DATABASES = {
     'default': dj_database_url.config(
-    default='postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',        conn_max_age=600    )}
+    default='postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',        conn_max_age=600    )}"""
 # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
 
 # Password validation
@@ -173,4 +173,19 @@ if 'TESTING' in os.environ:
     db_from_env = dj_database_url.config(default=POSTGRESQL_URL, conn_max_age=500)
 else:
     db_from_env = dj_database_url.config(default=NEON_URL, conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
+    # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+
+# To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'locallibrary',
+    'USER': 'ignacio.nunnez',
+    'PASSWORD': 'WQjce6b7izlA',
+    'HOST': 'ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech',
+    'PORT': '5432',
+    'OPTIONS': {'sslmode': 'require'},
+  }
+}
+
