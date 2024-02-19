@@ -360,3 +360,53 @@ class AuthorCreateViewTest(TestCase):
 
         # Check that we got a response "success"
         self.assertEqual(response.status_code, 200)
+
+    def test_forbidden_if_logged_in_but_not_correct_permission(self):
+        # Remove the permission to create an author
+        content_typeAuthor = ContentType.objects.get_for_model(Author)
+        permAddAuthor = Permission.objects.get(
+            codename="add_author",
+            content_type=content_typeAuthor,
+        )
+
+        self.test_user.user_permissions.remove(permAddAuthor)
+        self.test_user.save()
+
+        login = self.client.login(username='test_user', password='some_password')
+        response = self.client.get(reverse('author-create'))
+
+        assert response.status_code == 403
+
+
+        # Check that we got a response "success"
+        self.assertEqual(response.status_code, 403)
+
+    def test_uses_correct_template(self):
+        login = self.client.login(username='test_user', password='some_password')
+        response = self.client.get(reverse('author-create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'catalog/author_form.html')
+
+    def test_form_date_of_death_initially_set_to_expected_date(self):
+        login = self.client
+        response = self.client.get(reverse('author-create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.context['form'].initial['date_of_death'], datetime.date)
+        self.assertEqual(response.context['form'].initial['date_of_death'], datetime.date(2022, 8, 3))
+
+    def test_redirects_to_detail_view_on_success(self):
+        login = self.client.login(username='test_user', password='some_password')
+        response = self.client.post(reverse('author-create'), {
+            'first_name': 'Christian',
+            'last_name': 'Name',
+            'date_of_birth': '1990-01-01',
+            'date_of_death': '2022-08-03',
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith('/catalog/author/'))
+
+        
+
+    
+        

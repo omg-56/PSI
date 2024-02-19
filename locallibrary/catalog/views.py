@@ -32,7 +32,11 @@ def index(request):
     # The "all()" is implied by default
     num_authors = Author.objects.count()
 
+    num_genres = Genre.objects.all().count()
+
     word = request.GET.get("word", "")
+
+    num_books_with_letter = Book.objects.filter(title__icontains='a').count()
 
     num_genres_with_word = Genre.objects.filter(name__icontains=word).count()
     num_books_with_word = Book.objects.filter(title__icontains=word).count()
@@ -47,7 +51,9 @@ def index(request):
         "num_instances_available": num_instances_available,
         "num_authors": num_authors,
         "word": word,
+        "num_genres": num_genres,
         "num_genres_with_word": num_genres_with_word,
+        "num_books_with_letter": num_books_with_letter,
         "num_books_with_word": num_books_with_word,
         "num_visits": num_visits,
     }
@@ -203,16 +209,19 @@ class BookCreate(PermissionRequiredMixin, CreateView):
     model = Book
     fields = ['title', 'author', 'summary', 'isbn', 'genre']
     permission_required = 'catalog.add_book'
+    permission_required = 'catalog.can_mark_returned' # CAMBIO
 
 class BookUpdate(PermissionRequiredMixin, UpdateView):
     model = Book
     fields = ['title', 'author', 'summary', 'isbn', 'genre']
     permission_required = 'catalog.change_book'
+    permission_required = 'catalog.can_mark_returned' # CAMBIO
 
 class BookDelete(PermissionRequiredMixin, DeleteView):
     model = Book
     success_url = reverse_lazy('books')
     permission_required = 'catalog.delete_book'
+    permission_required = 'catalog.can_mark_returned' # CAMBIO
 
     def form_valid(self, form):
         # Check if there are any book instances

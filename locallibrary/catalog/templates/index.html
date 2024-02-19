@@ -8,14 +8,13 @@
     </p>
     <h2>Dynamic content</h2>
     <p>The library has the following record counts:</p>
-    <ul>
+    <ul class="numbered-list">
         <li><strong>Books:</strong> {{ num_books }}</li>
         <li><strong>Copies:</strong> {{ num_instances }}</li>
         <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
         <li><strong>Authors:</strong> {{ num_authors }}</li>
         <li><strong>Genres:</strong> {{ num_genres }}</li>
-        <li>There are {{ num_genres_with_word }} genres that contain the word "{{ word }}".</li>
-        <li>Books containing the letter 'a' in the title: {{ num_books_with_word }}</li>
+        <li><strong>Books containing the letter 'a' in the title: </strong> {{ num_books_with_letter }}</li>
     </ul>
     <p>You have visited this page {{num_visits}} time {{num_visists|pluralize}}.</p>
 {% endblock %}
