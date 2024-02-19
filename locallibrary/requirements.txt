@@ -1,3 +1,0 @@
-dj_database_url==2.1.0
-Django==4.2.2
-python-dotenv==1.0.1
