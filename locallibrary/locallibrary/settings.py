@@ -108,23 +108,10 @@ import dj_database_url
     'default': dj_database_url.config(
     default='postgresql://alumnodb:alumnodb@localhost:5432/locallibrary',        conn_max_age=600    )}"""
 
-"""DATABASES = {
+DATABASES = {
     'default': dj_database_url.config(
     default='postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',        conn_max_age=600    )}
-"""
 # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
-
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'locallibrary',
-    'USER': 'ignacio.nunnez',
-    'PASSWORD': 'WQjce6b7izlC',
-    'HOST': 'ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech',
-    'PORT': '5432',
-    'OPTIONS': {'sslmode': 'require'},
-  }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -175,7 +162,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = '/'
 
 POSTGRESQL_URL = 'postgresql://alumnodb:alumnodb@localhost:5432/locallibrary'
-NEON_URL = 'postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrarysslmode=require'
+NEON_URL = 'postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require'
 
 # To run the tests: export TESTING=1, or to use the app: unset TESTING
 # TESTING = 1
