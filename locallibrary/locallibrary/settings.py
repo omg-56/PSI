@@ -86,7 +86,7 @@ WSGI_APPLICATION = "locallibrary.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#import dj_database_url
+import dj_database_url
 
 """db_from_env = dj_database_url.config(
     default='postgres://alumnodb:alumnodb@localhost:5432/psi',
@@ -105,7 +105,6 @@ db_from_env = dj_database_url.config(
 #The following environment variable, called DATABASE_URL, has to be defined
 #at the o.s. level: export DATABASE_URL =
 # ’postgres://alumnodb:alumnodb@localhost:5432/psi’
-import dj_database_url
 """DATABASES = {
     'default': dj_database_url.config(
     default='postgresql://alumnodb:alumnodb@localhost:5432/locallibrary',        conn_max_age=600    )}"""
