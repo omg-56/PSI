@@ -110,7 +110,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
-    default='postgresql://ignacio.nunnez:************@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',        conn_max_age=600    )}
+    default='postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require',        conn_max_age=600    )}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -161,7 +161,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = '/'
 
 POSTGRESQL_URL = 'postgresql://alumnodb:alumnodb@localhost:5432/locallibrary'
-NEON_URL = 'postgresql://ignacio.nunnez:************@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require'
+NEON_URL = 'postgresql://ignacio.nunnez:WQjce6b7izlA@ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech/locallibrary?sslmode=require'
 
 # To run the tests: export TESTING=1, or to use the app: unset TESTING
 # TESTING = 1
