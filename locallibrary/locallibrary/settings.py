@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -89,19 +90,19 @@ WSGI_APPLICATION = "locallibrary.wsgi.application"
 
 
           
-DATABASES = {
+"""DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
-}
+}"""
 #The following environment variable, called DATABASE_URL, has to be defined
 #at the o.s. level: export DATABASE_URL =
 # ’postgres://alumnodb:alumnodb@localhost:5432/psi’
 import dj_database_url
-db_from_env = dj_database_url.config(default="postgres://alumnodb:alumnodb@localhost:5432/psi",
-conn_max_age=500)
-DATABASES["default"].update(db_from_env)
+DATABASES = {
+    'default': dj_database_url.config(
+    default='postgresql://alumnodb:alumnodb@localhost:5432/locallibrary',        conn_max_age=600    )}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
