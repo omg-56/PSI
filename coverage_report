@@ -1,0 +1,18 @@
+Name                                                    Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------------------------
+catalog/__init__.py                                         0      0   100%
+catalog/admin.py                                           24      0   100%
+catalog/apps.py                                             4      0   100%
+catalog/forms.py                                           15      0   100%
+catalog/migrations/0001_initial.py                          7      0   100%
+catalog/migrations/0002_alter_author_date_of_birth.py       4      0   100%
+catalog/migrations/0003_book_num_copies.py                  4      0   100%
+catalog/migrations/0004_remove_book_num_copies.py           4      0   100%
+catalog/migrations/0005_bookinstance_borrower.py            6      0   100%
+catalog/migrations/0006_alter_bookinstance_options.py       4      0   100%
+catalog/migrations/__init__.py                              0      0   100%
+catalog/models.py                                          64      5    92%   23, 60, 105, 112, 153
+catalog/urls.py                                             8      0   100%
+catalog/views.py                                          136     13    90%   200-204, 228-238
+-------------------------------------------------------------------------------------
+TOTAL                                                     280     18    94%
