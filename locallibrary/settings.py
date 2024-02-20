@@ -144,29 +144,36 @@ NEON_URL = (
     '/locallibrary?sslmode=require'
 )
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
 # To run the tests: export TESTING=1, or to use the app: unset TESTING
 # TESTING = 1
-
 # To see the current value just type echo $TESTING
-if 'TESTING' in os.environ:
+if 'TESTING' in os.environ and os.environ['TESTING'] == '1':
     db_from_env = dj_database_url.config(default=POSTGRESQL_URL,
                                          conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 else:
     db_from_env = dj_database_url.config(default=NEON_URL,
                                          conn_max_age=500)
+    print("Using neon server...")
+    print("It could go a bit slower.")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'locallibrary',
+            'USER': 'ignacio.nunnez',
+            'PASSWORD': 'WQjce6b7izlA',
+            'HOST': 'ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech',
+            'PORT': '5432',
+            'OPTIONS': {'sslmode': 'require'}, }
+    }
 
 """To use Neon with Django, you have to create a Project
    on Neon and specify the project connection settings in
    your settings.py in the same way as for standalone Postgres."""
-
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'locallibrary',
-    'USER': 'ignacio.nunnez',
-    'PASSWORD': 'WQjce6b7izlA',
-    'HOST': 'ep-yellow-sun-a20bfr41.eu-central-1.aws.neon.tech',
-    'PORT': '5432',
-    'OPTIONS': {'sslmode': 'require'},
-  }
-}
