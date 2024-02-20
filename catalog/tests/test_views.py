@@ -336,73 +336,65 @@ class AuthorCreateViewTest(TestCase):
 
     def setUp(self):
         # Create a user
-        self.test_user = User.objects.create_user(
-            username='test_user', password='some_password')
+        test_user_with = User.objects.create_user(
+            username='test_user_with', password='some_password')
+        test_user_without = User.objects.create_user(
+            username='test_user_without', password='some_password')
 
-        content_typeAuthor = ContentType.objects.get_for_model(Author)
         permAddAuthor = Permission.objects.get(
-            codename="add_author",
-            content_type=content_typeAuthor,
+            codename="can_mark_returned"
         )
 
-        self.test_user.user_permissions.add(permAddAuthor)
-        self.test_user.save()
-
-        self.client = Client()
+        test_user_with.user_permissions.add(permAddAuthor)
+        test_user_with.save()
+        test_user_without.save()
 
     def test_redirect_if_not_logged_in(self):
         response = self.client.get(reverse('author-create'))
-        self.assertRedirects(response, '/accounts/login/?next=/catalog/author/create/')
-
+        self.assertRedirects(response,
+                             '/accounts/login/?next=/catalog/author/create/')
+    
     def test_logged_in_with_permission(self):
-        login = self.client.login(username='test_user', password='some_password')
+        self.client.login(username='test_user_with', password='some_password')
         response = self.client.get(reverse('author-create'))
 
         # Check that we got a response "success"
         self.assertEqual(response.status_code, 200)
 
     def test_forbidden_if_logged_in_but_not_correct_permission(self):
-        # Remove the permission to create an author
-        content_typeAuthor = ContentType.objects.get_for_model(Author)
-        permAddAuthor = Permission.objects.get(
-            codename="add_author",
-            content_type=content_typeAuthor,
-        )
+        self.client.login(username='test_user_without', password='some_password')
 
-        self.test_user.user_permissions.remove(permAddAuthor)
-        self.test_user.save()
-
-        login = self.client.login(username='test_user', password='some_password')
+        # Should be forbidden as we don't have the required permission
         response = self.client.get(reverse('author-create'))
-
-        assert response.status_code == 403
-
-
-        # Check that we got a response "success"
         self.assertEqual(response.status_code, 403)
 
     def test_uses_correct_template(self):
-        login = self.client.login(username='test_user', password='some_password')
+        self.client.login(username='test_user_with', password='some_password')
         response = self.client.get(reverse('author-create'))
+
+        # Check that we got a response "success"
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'catalog/author_form.html')
 
     def test_form_date_of_death_initially_set_to_expected_date(self):
-        login = self.client
+        self.client.login(username='test_user_with', password='some_password')
         response = self.client.get(reverse('author-create'))
+
+        # Check that we got a response "success"
         self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(response.context['form'].initial['date_of_death'], datetime.date)
-        self.assertEqual(response.context['form'].initial['date_of_death'], datetime.date(2022, 8, 3))
+        self.assertEqual(response.context['form'].initial['date_of_death'],
+                         '11/11/2023')
 
     def test_redirects_to_detail_view_on_success(self):
-        login = self.client.login(username='test_user', password='some_password')
+        self.client.login(username='test_user_with', password='some_password')
         response = self.client.post(reverse('author-create'), {
             'first_name': 'Christian',
             'last_name': 'Name',
             'date_of_birth': '1990-01-01',
-            'date_of_death': '2022-08-03',
+            'date_of_death': '2022-03-03'
         })
 
+        # Check that we got a response "success"
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith('/catalog/author/'))
 
