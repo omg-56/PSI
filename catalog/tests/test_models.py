@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from catalog.models import Author
 
+
 class AuthorModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -32,4 +33,3 @@ class AuthorModelTest(TestCase):
         author = Author.objects.get(id=1)
         # This will also fail if the urlconf is not defined.
         self.assertEqual(author.get_absolute_url(), '/catalog/author/1')
-
